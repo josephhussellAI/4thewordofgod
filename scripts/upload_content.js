@@ -1,0 +1,100 @@
+import fs from 'fs/promises';
+import path from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import { parseArgs } from 'util';
+
+const execAsync = promisify(exec);
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const options = {
+    lang: null,
+    type: null,
+    dir: null,
+    dryRun: false
+};
+
+args.forEach(arg => {
+    if (arg.startsWith('--lang=')) options.lang = arg.split('=')[1];
+    if (arg.startsWith('--type=')) options.type = arg.split('=')[1];
+    if (arg.startsWith('--dir=')) options.dir = arg.split('=')[1];
+    if (arg === '--dry-run') options.dryRun = true;
+});
+
+if (!options.lang || !options.type || !options.dir) {
+    console.error('Usage: node scripts/upload_content.js --lang=<code> --type=<json|audio> --dir=<path> [--dry-run]');
+    process.exit(1);
+}
+
+const TARGET_DIR = process.cwd();
+
+async function uploadContent() {
+    try {
+        console.log(`Starting upload for Language: ${options.lang}, Type: ${options.type}, Source: ${options.dir}`);
+
+        const files = await fs.readdir(options.dir);
+        const targetFiles = files.filter(file =>
+            options.type === 'json' ? file.endsWith('.json') : file.endsWith('.mp3')
+        );
+
+        console.log(`Found ${targetFiles.length} files to process.`);
+
+        for (const file of targetFiles) {
+            // Expected filename format: BookName-ChapterNumber.ext (e.g., Daniel-01.mp3 or Daniel_01.json)
+            // Adjusting for potential differences in naming conventions
+            let namePart = file.replace(/\.(json|mp3)$/, '');
+
+            // Normalize separators to dashes for parsing if needed, or handle underscores
+            // Assuming standard format: BookName_Chapter (JSON) or BookName-Chapter (Audio)
+            // Let's try to be flexible.
+
+            // Strategy: Extract last number as chapter, rest as book slug
+            // Split by non-alphanumeric characters except for the last number
+
+            const match = namePart.match(/^(.+?)[-_](\d+)$/);
+
+            if (!match) {
+                console.warn(`Skipping file with invalid naming format: ${file} (Expected Book_01.json or Book-01.mp3)`);
+                continue;
+            }
+
+            let bookSlug = match[1].toLowerCase().replace(/_/g, '-').replace(/\s+/g, '-');
+            const chapterNum = parseInt(match[2], 10);
+
+            // Special case handling if needed (e.g. 1-john -> 1-john)
+            // The existing slug logic seems to be: lowercase, dashes.
+
+            console.log(`Processing ${file} -> Book: ${bookSlug}, Chapter: ${chapterNum}`);
+
+            const r2Path = `public-content/${options.lang}/${options.type}/${file}`;
+            const localFilePath = path.join(options.dir, file);
+
+            // 1. Upload to R2
+            if (options.dryRun) {
+                console.log(`[DRY RUN] Would upload ${localFilePath} to ${r2Path}`);
+            } else {
+                try {
+                    console.log(`Uploading ${file} to R2...`);
+                    await execAsync(`npx wrangler r2 object put bible-commentary-assets/${r2Path} --local --file="${localFilePath}"`, { cwd: TARGET_DIR });
+                } catch (e) {
+                    console.error(`Failed to upload R2 object for ${file}:`, e.message);
+                    continue;
+                }
+            }
+
+            // 2. Update D1 - REMOVED
+            // D1 integration has been removed.
+            if (options.dryRun) {
+                console.log(`[DRY RUN] D1 update skipped (removed).`);
+            }
+        }
+
+        console.log('Upload process complete!');
+
+    } catch (error) {
+        console.error('Upload failed:', error);
+    }
+}
+
+uploadContent();

@@ -1,0 +1,102 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {items.map((item) => (
+      <details class="faq-item">
+        <summary class="faq-question">{item.question}</summary>
+        <div class="faq-answer">{item.answer}</div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<style>
+  .faq-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--theme-border);
+    padding-top: 2rem;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: var(--theme-text);
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .faq-item {
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  
+  .faq-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--theme-accent);
+  }
+
+  .faq-item[open] {
+    border-color: var(--theme-accent);
+  }
+
+  .faq-question {
+    padding: 1.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    list-style: none;
+    font-family: 'Cinzel', serif;
+    color: var(--theme-text);
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Add a simple indicator */
+  .faq-question::after {
+    content: '+';
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--theme-accent);
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    line-height: 1.6;
+    color: var(--theme-text);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--theme-border);
+    margin-top: -0.5rem; /* Pull it up slightly to sit under the title padding */
+    padding-top: 1rem;
+  }
+</style>

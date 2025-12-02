@@ -1,0 +1,183 @@
+---
+const { currentLang } = Astro.props;
+
+// Mapping of Country Codes (ISO 3166-1 alpha-2) to Language Codes
+const countryToLang = {
+  'US': 'en', 'GB': 'en', 'CA': 'en', 'AU': 'en', 'NZ': 'en',
+  'MX': 'es', 'ES': 'es', 'CO': 'es', 'AR': 'es', 'PE': 'es', 'VE': 'es', 'CL': 'es', 'EC': 'es', 'GT': 'es', 'CU': 'es',
+  'FR': 'fr', 'BE': 'fr', 'CH': 'fr', 'SN': 'fr',
+  'CN': 'zh', 'TW': 'zh', 'HK': 'zh',
+  'DE': 'de', 'AT': 'de',
+  'IT': 'it',
+  'PT': 'pt', 'BR': 'pt',
+  'RU': 'ru',
+  'JP': 'ja',
+  'KR': 'ko',
+  'IN': 'hi', // Simplified, India has many languages
+  'SA': 'ar', 'EG': 'ar', 'AE': 'ar'
+};
+
+// Get country from Cloudflare header
+const country = Astro.request.headers.get('CF-IPCountry');
+const suggestedLang = country ? countryToLang[country] : null;
+
+// Determine if we should show the banner
+// We show it if:
+// 1. We have a suggested language
+// 2. The suggested language is different from the current language
+// 3. (Client-side) The user hasn't dismissed it
+const shouldRender = suggestedLang && suggestedLang !== currentLang;
+
+const languageNames = {
+    'en': 'English',
+    'es': 'Español',
+    'fr': 'Français',
+    'zh': '中文',
+    'de': 'Deutsch',
+    'it': 'Italiano',
+    'pt': 'Português',
+    'ru': 'Русский',
+    'ja': '日本語',
+    'ko': '한국어',
+    'hi': 'हिन्दी',
+    'ar': 'العربية'
+};
+
+const suggestedLangName = suggestedLang ? languageNames[suggestedLang] || suggestedLang : suggestedLang;
+---
+
+{shouldRender && (
+  <div id="lang-suggestion-banner" class="banner" data-suggested-lang={suggestedLang} style="display: none;">
+    <div class="content">
+      <p>
+        It looks like you are in {country}. Would you like to switch to {suggestedLangName}?
+      </p>
+      <div class="actions">
+        <button id="switch-lang-btn" class="switch-btn">Switch to {suggestedLangName}</button>
+        <button id="dismiss-lang-btn" class="dismiss-btn">Dismiss</button>
+      </div>
+    </div>
+  </div>
+)}
+
+<script>
+  const banner = document.getElementById('lang-suggestion-banner');
+  if (banner) {
+    const suggestedLang = banner.dataset.suggestedLang;
+    const dismissed = localStorage.getItem(`dismissed-lang-${suggestedLang}`);
+
+    if (!dismissed) {
+      banner.style.display = 'block';
+    }
+
+    const switchBtn = document.getElementById('switch-lang-btn');
+    const dismissBtn = document.getElementById('dismiss-lang-btn');
+
+    if (switchBtn) {
+      switchBtn.addEventListener('click', () => {
+        // Construct new URL
+        // Assuming URL structure is /[lang]/[book]/[chapter]
+        // We replace the first path segment
+        const currentPath = window.location.pathname;
+        const segments = currentPath.split('/').filter(p => p);
+        
+        if (segments.length >= 1) {
+            segments[0] = suggestedLang;
+            const newPath = '/' + segments.join('/');
+            window.location.href = newPath;
+        } else {
+            // Fallback for root or weird paths
+            window.location.href = `/${suggestedLang}`;
+        }
+      });
+    }
+
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', () => {
+        banner.style.display = 'none';
+        localStorage.setItem(`dismissed-lang-${suggestedLang}`, 'true');
+      });
+    }
+  }
+</script>
+
+<style>
+  .banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--theme-surface);
+    border-top: 1px solid var(--theme-accent);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 2000;
+    padding: 1rem;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .content {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  p {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: var(--theme-text);
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+
+  .switch-btn {
+    background-color: var(--theme-accent);
+    color: var(--theme-bg);
+    border: none;
+  }
+
+  .switch-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .dismiss-btn {
+    background-color: transparent;
+    color: var(--theme-text);
+    border: 1px solid var(--theme-text);
+  }
+
+  .dismiss-btn:hover {
+    background-color: var(--theme-text);
+    color: var(--theme-bg);
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+</style>

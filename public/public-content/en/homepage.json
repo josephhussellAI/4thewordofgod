@@ -1,0 +1,706 @@
+{
+  "site_title": "Prophetic Word Commentaries",
+  "tagline": "Free online Bible commentaries focused on unsealing the meaning of prophecy and history.",
+  "commentaries_section_title": "Commentaries",
+  "articles_section_title": "Articles",
+  "commentaries": [
+    {
+      "book_name": "Amos",
+      "chapter_number": "00",
+      "title": "A commentary on Amos",
+      "metaDescription": "Dive into the Book of Amos: a shepherd's blunt prophecy against social injustice and idolatry in ancient Israel, warning of judgment and the Assyrian exile.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Amos"
+        },
+        {
+          "chapter_number": "01",
+          "title": "The Shepherd’s Call: Judgment Over Israel and Judah’s Sins"
+        },
+        {
+          "chapter_number": "02",
+          "title": "Fire on the Palaces: Divine Judgment Upon Moab and Judah"
+        },
+        {
+          "chapter_number": "03",
+          "title": "The Lion Roars: God Reveals His Judgment Against Israel"
+        },
+        {
+          "chapter_number": "04",
+          "title": "Prepare to Meet Thy God: Judgment Falls on Samaria"
+        },
+        {
+          "chapter_number": "05",
+          "title": "Seek God and Live: A Call for True Justice"
+        },
+        {
+          "chapter_number": "06",
+          "title": "Woe to Those at Ease: Judgment on Israel’s Complacency"
+        },
+        {
+          "chapter_number": "07",
+          "title": "The Plumb-Line Vision: Amos Confronts the Priest Amaziah"
+        },
+        {
+          "chapter_number": "08",
+          "title": "A Basket of Summer Fruit: The Famine of God’s Word"
+        },
+        {
+          "chapter_number": "09",
+          "title": "Inescapable Judgment and the Promise to Restore David’s Tabernacle"
+        }
+      ]
+    },
+    {
+      "book_name": "Daniel",
+      "chapter_number": "00",
+      "title": "A commentary on Daniel",
+      "metaDescription": "Explore the Book of Daniel: a journey from the fiery furnace in Babylon to the prophetic 70 weeks. Discover God's sovereignty over history and future nations.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Daniel"
+        },
+        {
+          "chapter_number": "01",
+          "title": "Jerusalem’s Fall and the Beginning of Babylonian Captivity"
+        },
+        {
+          "chapter_number": "02",
+          "title": "Nebuchadnezzar’s Dream: The Statue and the Crushing Stone"
+        },
+        {
+          "chapter_number": "03",
+          "title": "Refusing to Bow: Defying the Golden Image at Dura"
+        },
+        {
+          "chapter_number": "04",
+          "title": "The Dream of the Great Tree and Nebuchadnezzar’s Madness"
+        },
+        {
+          "chapter_number": "05",
+          "title": "Belshazzar’s Feast and the Mysterious Writing on the Wall"
+        },
+        {
+          "chapter_number": "06",
+          "title": "The Persian Plot: Daniel’s Prayer and the Lions’ Den"
+        },
+        {
+          "chapter_number": "07",
+          "title": "The Vision of Four Beasts and Future World Kingdoms"
+        },
+        {
+          "chapter_number": "08",
+          "title": "Prophecy of the Ram, the Goat, and Medo-Persia"
+        },
+        {
+          "chapter_number": "09",
+          "title": "Unlocking Jeremiah’s Prophecy and the Return to Jerusalem"
+        },
+        {
+          "chapter_number": "10",
+          "title": "Spiritual Warfare: Michael Battles the Prince of Persia"
+        },
+        {
+          "chapter_number": "11",
+          "title": "Prophecies of Xerxes, Alexander the Great, and Future Kings"
+        },
+        {
+          "chapter_number": "12",
+          "title": "The End Times: Resurrection, Judgment, and the Book of Life"
+        }
+      ]
+    },
+    {
+      "book_name": "Esther",
+      "chapter_number": "00",
+      "title": "A commentary on Esther",
+      "metaDescription": "Explore the Introduction to Esther: a story of God's providence amidst Persian politics. Discover the roles of Mordecai, Esther, and Haman in saving the Jews.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Esther"
+        },
+        {
+          "chapter_number": "01",
+          "title": "King Ahasuerus's Banquet and the Banishment of Queen Vashti"
+        },
+        {
+          "chapter_number": "02",
+          "title": "From Captivity to Crown: Esther Becomes Queen of Persia"
+        },
+        {
+          "chapter_number": "03",
+          "title": "Haman’s Rise to Power and the Plot Against the Jews"
+        },
+        {
+          "chapter_number": "04",
+          "title": "Esther Finds Courage for Such a Time as This"
+        },
+        {
+          "chapter_number": "05",
+          "title": "The Golden Scepter: Esther Approaches the King with Courage"
+        },
+        {
+          "chapter_number": "06",
+          "title": "The King’s Insomnia and the Surprise Honor of Mordecai"
+        },
+        {
+          "chapter_number": "07",
+          "title": "Esther Exposes Haman’s Wicked Plot at the Royal Banquet"
+        },
+        {
+          "chapter_number": "08",
+          "title": "A New Decree: Mordecai’s Promotion and Israel’s Deliverance"
+        },
+        {
+          "chapter_number": "09",
+          "title": "Victory Over Enemies and the Institution of the Feast of Purim"
+        },
+        {
+          "chapter_number": "10",
+          "title": "The Greatness of Mordecai and His Legacy of Peace"
+        }
+      ]
+    },
+    {
+      "book_name": "Ezra",
+      "chapter_number": "00",
+      "title": "A commentary on Ezra",
+      "metaDescription": "Explore the Book of Ezra's historical context, the Jewish return from exile under Zerubbabel, and the rebuilding of the Temple in this expert Bible commentary.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Ezra"
+        },
+        {
+          "chapter_number": "01",
+          "title": "King Cyrus Issues the Decree to Restore Temple Treasures"
+        },
+        {
+          "chapter_number": "02",
+          "title": "The Great Exodus: Exiles and Priests Return from Babylon"
+        },
+        {
+          "chapter_number": "03",
+          "title": "Restoring Worship: Rebuilding the Altar and Laying the Foundation"
+        },
+        {
+          "chapter_number": "04",
+          "title": "Enemies Hinder the Work: Opposition Stops the Temple Construction"
+        },
+        {
+          "chapter_number": "05",
+          "title": "Prophets Spark Revival while Tattenai Investigates the Temple Project"
+        },
+        {
+          "chapter_number": "06",
+          "title": "King Darius Discovers the Decree and Funds the Temple Completion"
+        },
+        {
+          "chapter_number": "07",
+          "title": "Ezra the Scribe Arrives to Ignite a Spiritual Revival"
+        },
+        {
+          "chapter_number": "08",
+          "title": "Fasting for Protection: The Levites Join the Journey Home"
+        },
+        {
+          "chapter_number": "09",
+          "title": "Ezra Confronts the Sin of Intermarriage and Pagan Practices"
+        },
+        {
+          "chapter_number": "10",
+          "title": "A Solemn Covenant: The Nation Repents and Purifies Itself"
+        }
+      ]
+    },
+    {
+      "book_name": "Haggai",
+      "chapter_number": "00",
+      "title": "A commentary on Haggai",
+      "metaDescription": "Discover the background and key themes of the Book of Haggai. Learn how the prophet motivated Israel to rebuild the Temple in 520 BC amidst apathy and ruins.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Haggai"
+        },
+        {
+          "chapter_number": "01",
+          "title": "Rebuilding Jerusalem: The Struggle to Restore the Temple Ruins"
+        },
+        {
+          "chapter_number": "02",
+          "title": "Haggai and Zechariah: Rebuilding the Temple for Greater Glory"
+        }
+      ]
+    },
+    {
+      "book_name": "Isaiah",
+      "chapter_number": "00",
+      "title": "A commentary on Isaiah",
+      "metaDescription": "Explore the historical context, theological themes, and Messianic prophecies of Isaiah. Learn about the Suffering Servant, God's judgment, and future hope.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Isaiah"
+        },
+        {
+          "chapter_number": "01",
+          "title": "The Great Arraignment: Sham Worship and the Call to Reason"
+        },
+        {
+          "chapter_number": "02",
+          "title": "The Mountain of the Lord and the Humbling of Pride"
+        },
+        {
+          "chapter_number": "03",
+          "title": "The Collapse of Civil Order and Judgment of the Haughty"
+        },
+        {
+          "chapter_number": "04",
+          "title": "The Branch of the Lord and the Holy Remnant"
+        },
+        {
+          "chapter_number": "05",
+          "title": "The Parable of the Vineyard and the Six Woes"
+        },
+        {
+          "chapter_number": "06",
+          "title": "The Vision of the Holy Throne and the Cleansing Coal"
+        },
+        {
+          "chapter_number": "07",
+          "title": "The Sign of Immanuel: Faith Amidst Impending Judgment"
+        },
+        {
+          "chapter_number": "08",
+          "title": "The Sign of the Son and the Coming Assyrian Flood"
+        },
+        {
+          "chapter_number": "09",
+          "title": "The Great Light of Galilee and the Prince of Peace"
+        },
+        {
+          "chapter_number": "10",
+          "title": "God's Axe of Judgment and the Restoration of the Remnant"
+        },
+        {
+          "chapter_number": "11",
+          "title": "The Branch of Jesse and the Coming Kingdom of Peace"
+        },
+        {
+          "chapter_number": "12",
+          "title": "Drawing Water with Joy from the Wells of Salvation"
+        },
+        {
+          "chapter_number": "13",
+          "title": "The Doom of Babylon and the Day of the Lord"
+        },
+        {
+          "chapter_number": "14",
+          "title": "The Fall of Lucifer and the Taunt of Triumph"
+        },
+        {
+          "chapter_number": "15",
+          "title": "The Burden of Moab and the Night of Destruction"
+        },
+        {
+          "chapter_number": "16",
+          "title": "The Pride of Moab and the Cry for Sanctuary"
+        },
+        {
+          "chapter_number": "17",
+          "title": "The Burden of Damascus and the Harvest of Sorrow"
+        },
+        {
+          "chapter_number": "18",
+          "title": "God's Quiet Judgment and the Ethiopian Tribute"
+        },
+        {
+          "chapter_number": "19",
+          "title": "Egypt's Panic, Punishment, and Prophetic Restoration"
+        },
+        {
+          "chapter_number": "20",
+          "title": "The Prophecy of the Barefoot Sign and Egypt's Shame"
+        },
+        {
+          "chapter_number": "21",
+          "title": "The Vision of the Watchman and Babylon's Fall"
+        },
+        {
+          "chapter_number": "22",
+          "title": "The Burden of the Valley of Vision and the Key of David"
+        },
+        {
+          "chapter_number": "23",
+          "title": "The Prophetic Judgment of the Merchant City"
+        },
+        {
+          "chapter_number": "24",
+          "title": "The Curse Devours the Earth"
+        },
+        {
+          "chapter_number": "25",
+          "title": "Death Swallowed in Victory and the Feast of Fat Things"
+        },
+        {
+          "chapter_number": "26",
+          "title": "The Song of the Redeemed and the Resurrection"
+        },
+        {
+          "chapter_number": "27",
+          "title": "Slaying Leviathan and the Restoration of the Vineyard"
+        },
+        {
+          "chapter_number": "28",
+          "title": "The Sure Foundation and the Covenant with Death"
+        },
+        {
+          "chapter_number": "29",
+          "title": "The Siege of Ariel and the Sealed Book"
+        },
+        {
+          "chapter_number": "30",
+          "title": "The Futility of Trusting in the Shadow of Egypt"
+        },
+        {
+          "chapter_number": "31",
+          "title": "The Futility of Flesh and the Fire of Zion"
+        },
+        {
+          "chapter_number": "32",
+          "title": "The Righteous King and the Shelter from the Storm"
+        },
+        {
+          "chapter_number": "33",
+          "title": "Judgment on the Destroyer and Peace for Zion"
+        },
+        {
+          "chapter_number": "34",
+          "title": "The Sword of the Lord and the Desolation of Idumea"
+        },
+        {
+          "chapter_number": "35",
+          "title": "The Highway of Holiness and the Return of the Redeemed"
+        },
+        {
+          "chapter_number": "36",
+          "title": "Assyrian Intimidation and the War of Words"
+        },
+        {
+          "chapter_number": "37",
+          "title": "Divine Deliverance and the Fall of the Assyrian Boaster"
+        },
+        {
+          "chapter_number": "38",
+          "title": "The Miracle of Added Years and the Backward Shadow"
+        },
+        {
+          "chapter_number": "39",
+          "title": "The Prideful Tour and Babylon's Trap"
+        },
+        {
+          "chapter_number": "40",
+          "title": "Comfort for Zion and the Renewal of Strength"
+        },
+        {
+          "chapter_number": "41",
+          "title": "The Champion of Justice and the Challenge to Idols"
+        },
+        {
+          "chapter_number": "42",
+          "title": "The Chosen Servant: Light to the Gentiles and Deliverer of the Blind"
+        },
+        {
+          "chapter_number": "43",
+          "title": "Redemption Through Fire and the Promise of a New Thing"
+        },
+        {
+          "chapter_number": "44",
+          "title": "The Vanity of Idols and the Decree of Cyrus"
+        },
+        {
+          "chapter_number": "45",
+          "title": "The Anointed Conqueror and the Sovereignty of the One True God"
+        },
+        {
+          "chapter_number": "46",
+          "title": "The Burden of Idols Versus the God Who Carries"
+        },
+        {
+          "chapter_number": "47",
+          "title": "The Fall of the Lady of Kingdoms"
+        },
+        {
+          "chapter_number": "48",
+          "title": "Refined in the Furnace of Affliction for His Name's Sake"
+        },
+        {
+          "chapter_number": "49",
+          "title": "The Light to the Gentiles and the Restoration of Zion"
+        },
+        {
+          "chapter_number": "50",
+          "title": "The Obedient Servant and the Face Like Flint"
+        },
+        {
+          "chapter_number": "51",
+          "title": "Awakening the Arm of the Lord and Comforting Zion"
+        },
+        {
+          "chapter_number": "52",
+          "title": "The Redemption of Zion and the Suffering Servant"
+        },
+        {
+          "chapter_number": "53",
+          "title": "From the Crib to the Cross to the Crown"
+        },
+        {
+          "chapter_number": "54",
+          "title": "The Future Glory of Zion and the Restored Covenant"
+        },
+        {
+          "chapter_number": "55",
+          "title": "The Free Banquet and the Everlasting Covenant"
+        },
+        {
+          "chapter_number": "56",
+          "title": "A House of Prayer for All People and the Blind Watchmen"
+        },
+        {
+          "chapter_number": "57",
+          "title": "Revival for the Contrite and the Restless Wicked"
+        },
+        {
+          "chapter_number": "58",
+          "title": "True Fasting and the Repairer of the Breach"
+        },
+        {
+          "chapter_number": "59",
+          "title": "The Divine Intercessor and the Covenant of Spirit"
+        },
+        {
+          "chapter_number": "60",
+          "title": "The Splendor of Zion's Restoration"
+        },
+        {
+          "chapter_number": "61",
+          "title": "The Year of the LORD’s Pardon and Beauty for Ashes"
+        },
+        {
+          "chapter_number": "62",
+          "title": "God's Delight and The Bride: A Royal Restoration"
+        },
+        {
+          "chapter_number": "63",
+          "title": "The Messiah's Vengeance and the Prayer for Mercy"
+        },
+        {
+          "chapter_number": "64",
+          "title": "Rending the Heavens and the Potter's Hand"
+        },
+        {
+          "chapter_number": "65",
+          "title": "New Heavens, New Earth, and the Joy of the Remnant"
+        },
+        {
+          "chapter_number": "66",
+          "title": "The Birth of a Nation and True Worship"
+        }
+      ]
+    },
+    {
+      "book_name": "Nehemiah",
+      "chapter_number": "00",
+      "title": "A commentary on Nehemiah",
+      "metaDescription": "Nehemiah transformed from cupbearer to governor, rebuilding Jerusalem's walls in 52 days. Discover his leadership, prayer life, and the prophecy of the 69 weeks.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Nehemiah"
+        },
+        {
+          "chapter_number": "01",
+          "title": "Nehemiah’s Prayer: Leaving Persia to Rebuild Jerusalem"
+        },
+        {
+          "chapter_number": "02",
+          "title": "Inspecting the Ruins: A Call to Rebuild the Wall"
+        },
+        {
+          "chapter_number": "03",
+          "title": "The Builders Rise Up: Securing the Gates of Jerusalem"
+        },
+        {
+          "chapter_number": "04",
+          "title": "Standing Firm: Defending the Wall Against Relentless Opposition"
+        },
+        {
+          "chapter_number": "05",
+          "title": "Confronting Greed: Nehemiah Demands Justice for the Poor"
+        },
+        {
+          "chapter_number": "06",
+          "title": "Defeating Intimidation: Nehemiah Finishes the Wall Despite Plots"
+        },
+        {
+          "chapter_number": "07",
+          "title": "Organizing Jerusalem: Securing Gates and Listing the Exiles"
+        },
+        {
+          "chapter_number": "08",
+          "title": "Rediscovering the Law: Ezra and Nehemiah Spark Revival"
+        },
+        {
+          "chapter_number": "09",
+          "title": "The Great Confession: Repentance and Remembering God’s Faithfulness"
+        },
+        {
+          "chapter_number": "10",
+          "title": "Signing the Covenant: Pledging Obedience to God’s Law"
+        },
+        {
+          "chapter_number": "11",
+          "title": "Repopulating the Holy City Through a Divine Lottery"
+        },
+        {
+          "chapter_number": "12",
+          "title": "Dedicating the Wall: A Grand Parade of Praise"
+        },
+        {
+          "chapter_number": "13",
+          "title": "Cleansing the Temple: Nehemiah’s Zeal for Holiness"
+        }
+      ]
+    },
+    {
+      "book_name": "Revelation",
+      "chapter_number": "00",
+      "title": "A commentary on Revelation",
+      "metaDescription": "Explore the Book of Revelation with this plain-language commentary. Witness the Four Horsemen, the Beast, and the New Jerusalem through a straightforward guide.",
+      "type": "commentary",
+      "date": "2024-01-01",
+      "toc": [
+        {
+          "chapter_number": "00",
+          "title": "Introduction to Revelation"
+        },
+        {
+          "chapter_number": "01",
+          "title": "Unsealing the Divine Code: Jesus the Alpha and Omega"
+        },
+        {
+          "chapter_number": "02",
+          "title": "The Seven Churches: Letters to Ephesus and Ancient Cities"
+        },
+        {
+          "chapter_number": "03",
+          "title": "Warnings to Sardis, Philadelphia, and the Lukewarm Laodicea"
+        },
+        {
+          "chapter_number": "04",
+          "title": "The Heavenly Coronation: God on the Throne of Glory"
+        },
+        {
+          "chapter_number": "05",
+          "title": "The Worthy Lamb: Jesus Unseals the Book of Destiny"
+        },
+        {
+          "chapter_number": "06",
+          "title": "Breaking the Seven Seals: Horsemen, Conquest, and Rome"
+        },
+        {
+          "chapter_number": "07",
+          "title": "Holding Back the Winds: Sealing the 144,000 Saints"
+        },
+        {
+          "chapter_number": "08",
+          "title": "The Trumpets Sound: Barbarian Invasions and Rome’s Fall"
+        },
+        {
+          "chapter_number": "09",
+          "title": "The Fallen Star: Prophecy of Mohammed and the Abyss"
+        },
+        {
+          "chapter_number": "10",
+          "title": "The Protestant Reformation: Martin Luther and the Little Book"
+        },
+        {
+          "chapter_number": "11",
+          "title": "Measuring the Temple: Restoring the Bible to the People"
+        },
+        {
+          "chapter_number": "12",
+          "title": "The Woman and the Dragon: The Church in the Wilderness"
+        },
+        {
+          "chapter_number": "13",
+          "title": "The Beast Rising: Rome, Caesars, and the Mark 666"
+        },
+        {
+          "chapter_number": "14",
+          "title": "The Everlasting Gospel: Victory Song on Mount Zion"
+        },
+        {
+          "chapter_number": "15",
+          "title": "Victory Over the Beast: The Seven Last Plagues Begin"
+        },
+        {
+          "chapter_number": "16",
+          "title": "The Seven Vials: Pouring God’s Wrath on the Beast"
+        },
+        {
+          "chapter_number": "17",
+          "title": "The Great Harlot: Unveiling the Mystery of Babylon"
+        },
+        {
+          "chapter_number": "18",
+          "title": "The Fall of Babylon: Judgment Upon Papal Rome"
+        },
+        {
+          "chapter_number": "19",
+          "title": "The King of Kings: Jesus Wars Against the Beast"
+        },
+        {
+          "chapter_number": "20",
+          "title": "Satan Bound: The Millennium and Christ’s Thousand-Year Reign"
+        },
+        {
+          "chapter_number": "21",
+          "title": "A New Creation: The Glory of the New Jerusalem"
+        },
+        {
+          "chapter_number": "22",
+          "title": "Paradise Regained: The Tree of Life Restored"
+        }
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "book_name": "Fall of the World Trade Center",
+      "chapter_number": "00",
+      "title": "Fall of the World Trade Center",
+      "metaDescription": "Explore the detailed fulfillment of prophecies against Tyre in Ezekiel 26-28. Discover how Nebuchadnezzar and Alexander the Great brought down this ancient commercial superpower.",
+      "type": "article",
+      "date": "2025-11-29"
+    }
+  ]
+}

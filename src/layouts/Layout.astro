@@ -1,0 +1,176 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import LanguageSuggestionBanner from '../components/LanguageSuggestionBanner.astro';
+import type { TierConfig } from '../types';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	description?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	keywords?: string[];
+	structuredData?: object[];
+	dir?: 'LTR' | 'RTL';
+    languages?: TierConfig[];
+    currentLang?: string;
+    chapters?: { chapter_number: string | number; original_title: string | null }[];
+    currentBook?: string;
+    currentChapter?: string | number;
+    firstChapters?: Record<string, string>;
+}
+
+const { 
+	title, 
+	description = "A Bible commentary platform.", 
+	ogTitle, 
+	ogDescription, 
+	keywords = [], 
+	structuredData = [], 
+	dir = 'LTR',
+    languages = [],
+    currentLang,
+    chapters = [],
+    currentBook,
+    currentChapter,
+    firstChapters = {}
+} = Astro.props;
+
+
+---
+
+<!doctype html>
+<html lang="en" dir={dir === 'RTL' ? 'rtl' : 'ltr'}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+		{ogTitle && <meta property="og:title" content={ogTitle} />}
+		{ogDescription && <meta property="og:description" content={ogDescription} />}
+		{keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+		
+		{structuredData.length > 0 && (
+			<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		)}
+        <ViewTransitions />
+        <script is:inline>
+            // Immediate theme application to prevent flash
+            const theme = localStorage.getItem('theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        </script>
+	</head>
+	<body>
+        <div class="app-container">
+            <Sidebar 
+                chapters={chapters} 
+                currentBook={currentBook} 
+                currentChapter={currentChapter} 
+                currentLang={currentLang}
+                firstChapters={firstChapters}
+            />
+            <div class="top-controls" transition:persist>
+                <!-- <LanguageSwitcher languages={languages} currentLang={currentLang} /> -->
+                <ThemeToggle />
+            </div>
+            <main class="main-content">
+ 		        <slot />
+            </main>
+        </div>
+        <!-- <LanguageSuggestionBanner currentLang={currentLang} /> -->
+	</body>
+</html>
+<style is:global>
+	:root {
+        --theme-bg: #f7f5f0;       /* Alabaster - Warm off-white, less yellow */
+        --theme-text: #1a1510;     /* Ink Black/Brown */
+        --theme-accent: #8b6c30;   /* Darker Gold/Bronze */
+        --theme-border: #d4c4a0;   /* Darker Parchment */
+        --theme-surface: #eaddcf;  /* Lighter Parchment for cards */
+        
+        --theme-surface-highlight: rgba(0, 0, 0, 0.05); /* Subtle darkening for footers */
+        --theme-hover-bg: rgba(139, 108, 48, 0.1);      /* Darker Gold tint */
+        --theme-active-bg: rgba(139, 108, 48, 0.2);     /* Stronger Gold tint */
+        
+        /* Font sizes */
+        --font-size-base: 16px;
+        --font-size-lg: 1.25rem;
+        --font-size-xl: 1.5rem;
+	}
+
+    /* Dark Mode Override */
+    [data-theme="dark"] {
+        --theme-bg: #1a1510;       /* Dark Leather/Wood */
+        --theme-text: #f7f5f0;     /* Parchment White */
+        --theme-accent: #b48c50;   /* Gold */
+        --theme-border: #3d3020;   /* Darker Wood */
+        --theme-surface: #251f18;  /* Slightly lighter background for cards */
+        
+        --theme-surface-highlight: rgba(0, 0, 0, 0.2);  /* Darker darkening for footers */
+        --theme-hover-bg: rgba(180, 140, 80, 0.1);      /* Lighter Gold tint */
+        --theme-active-bg: rgba(180, 140, 80, 0.2);     /* Stronger Gold tint */
+    }
+
+	html {
+		font-family: 'Lato', sans-serif;
+		background: var(--theme-bg);
+		color: var(--theme-text);
+        transition: background-color 0.3s ease, color 0.3s ease;
+	}
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .app-container {
+        display: flex;
+        min-height: 100vh;
+    }
+    .main-content {
+        flex-grow: 1;
+        margin-left: 280px; /* Width of sidebar */
+        padding: 2rem;
+        background: var(--theme-bg);
+        transition: background-color 0.3s ease;
+    }
+    .top-controls {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 1000;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+    h1, .page-title {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 1em;
+        font-family: 'Cinzel', serif;
+        color: var(--theme-text);
+    }
+</style>

@@ -1,0 +1,325 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug?: string;
+  link?: string;
+  firstChapter?: string;
+  toc?: { chapter_number: string; title: string }[];
+}
+
+const { title, description, slug, link, firstChapter = '01', toc = [] } = Astro.props;
+
+const cardLink = link || (slug === 'tyre' 
+  ? `/en/articles/fall-of-the-world-trade-center`
+  : (slug ? `/en/${slug}/${firstChapter}` : '#'));
+---
+
+<div class="book-card-container">
+  <a href={cardLink} class="book-card">
+    <div class="card-content">
+      <h3 class="card-title">{title}</h3>
+      <p class="card-description">{description}</p>
+      <div class="card-footer">
+        <span class="read-more">View Book Online</span>
+        
+        <div class="download-container">
+          <button class="download-btn" aria-label="Download Options">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+          
+          <div class="download-dropdown">
+            <div class="dropdown-item disabled">PDF (Coming Soon)</div>
+            <div class="dropdown-item disabled">EPUB (Coming Soon)</div>
+            <div class="dropdown-item disabled">TXT (Coming Soon)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  {toc.length > 0 && (
+    <div class="toc-section">
+      <button class="toc-toggle" aria-expanded="false">
+        <span class="toc-label">Table of Contents</span>
+        <svg class="toc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <div class="toc-content" hidden>
+        <ul class="toc-list">
+          {toc.map((chapter) => (
+            <li>
+              <a href={`/en/${slug}/${chapter.chapter_number}`} class="toc-link">
+                <span class="chapter-num">{chapter.chapter_number === '00' ? 'Intro' : `Ch ${parseInt(chapter.chapter_number)}`}</span>
+                <span class="chapter-title">{chapter.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )}
+</div>
+
+<script>
+  // Handle TOC toggle
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.toc-toggle').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', (!isExpanded).toString());
+        
+        const content = button.nextElementSibling as HTMLElement;
+        if (content) {
+          content.hidden = isExpanded;
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .book-card-container {
+    display: flex;
+    flex-direction: column;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .book-card-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: var(--theme-accent);
+  }
+
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    color: var(--theme-text);
+    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--theme-border);
+    padding-bottom: 0.5rem;
+  }
+
+  .card-description {
+    color: var(--theme-text);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--theme-surface-highlight);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-top: auto;
+  }
+
+  .read-more {
+    color: var(--theme-text);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .download-container {
+    position: relative;
+  }
+
+  .download-btn {
+    background: transparent;
+    border: 1px solid var(--theme-border);
+    color: var(--theme-text);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .download-btn:hover {
+    border-color: var(--theme-accent);
+    color: var(--theme-accent);
+  }
+
+  .download-btn .icon {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+  }
+
+  .download-dropdown {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-border);
+    border-radius: 4px;
+    padding: 0.5rem 0;
+    min-width: 160px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    z-index: 20;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Show dropdown on hover of container */
+  .download-container:hover .download-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--theme-text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .dropdown-item:hover:not(.disabled) {
+    background: var(--theme-hover-bg);
+    color: var(--theme-accent);
+  }
+
+  .dropdown-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    font-style: italic;
+  }
+
+  /* TOC Styles */
+  .toc-section {
+    border-top: 1px solid var(--theme-border);
+    background: var(--theme-surface-highlight);
+  }
+
+  .toc-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--theme-text);
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .toc-toggle:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .toc-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .toc-toggle[aria-expanded="true"] .toc-icon {
+    transform: rotate(180deg);
+  }
+
+  .toc-content {
+    border-top: 1px solid var(--theme-border);
+    background: var(--theme-bg);
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-text) transparent;
+  }
+
+  .toc-content[hidden] {
+    display: none;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--theme-text);
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--theme-border);
+    transition: background 0.2s;
+  }
+
+  .toc-link:last-child {
+    border-bottom: none;
+  }
+
+  .toc-link:hover {
+    background: var(--theme-surface-highlight);
+    color: var(--theme-accent);
+  }
+
+  .chapter-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--theme-accent);
+    min-width: 60px;
+    margin-right: 1rem;
+  }
+
+  .chapter-title {
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

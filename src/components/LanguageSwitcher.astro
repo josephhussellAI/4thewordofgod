@@ -1,0 +1,334 @@
+---
+import type { TierConfig } from '../types';
+
+interface Props {
+  languages: TierConfig[];
+  currentLang?: string;
+}
+
+const { languages, currentLang } = Astro.props;
+
+// Helper to get full language name
+const getLanguageName = (code: string) => {
+  try {
+    return new Intl.DisplayNames(['en'], { type: 'language' }).of(code) || code;
+  } catch (e) {
+    return code;
+  }
+};
+
+const currentLangName = currentLang ? getLanguageName(currentLang) : 'Select Language';
+---
+
+<div class="language-switcher" id="language-switcher">
+  <button 
+    class="switcher-trigger" 
+    id="switcher-trigger" 
+    aria-haspopup="true" 
+    aria-expanded="false"
+    aria-label="Select Language"
+  >
+    <span class="current-lang">{currentLangName}</span>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+
+  <div class="dropdown-menu" id="dropdown-menu">
+    <div class="search-container">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input 
+        type="text" 
+        id="lang-search" 
+        placeholder="Search languages..." 
+        autocomplete="off"
+      />
+    </div>
+    
+    <ul class="lang-list" id="lang-list" role="listbox">
+      {languages.map((lang) => {
+        const langName = getLanguageName(lang.language_code);
+        const isSelected = lang.language_code === currentLang;
+        const hasAudio = lang.language_code === 'en'; // Hardcoded for now as per request
+
+        return (
+          <li role="option" aria-selected={isSelected}>
+            <a href="#" data-lang={lang.language_code} class="lang-option">
+              <span class="lang-name">{langName}</span>
+              <div class="lang-meta">
+                {hasAudio && (
+                  <span class="audio-badge" title="Audio Available">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="audio-icon">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                  </span>
+                )}
+                {isSelected && (
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                )}
+              </div>
+            </a>
+          </li>
+        );
+      })}
+      {languages.length === 0 && (
+        <li class="no-results">No languages found</li>
+      )}
+    </ul>
+  </div>
+</div>
+
+<script>
+  const switcher = document.getElementById('language-switcher');
+  const trigger = document.getElementById('switcher-trigger');
+  const menu = document.getElementById('dropdown-menu');
+  const searchInput = document.getElementById('lang-search') as HTMLInputElement;
+  const langList = document.getElementById('lang-list');
+  const options = document.querySelectorAll('.lang-option');
+
+  if (switcher && trigger && menu && searchInput && langList) {
+    // Toggle Dropdown
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      toggleMenu(!isExpanded);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!switcher.contains(e.target as Node)) {
+        toggleMenu(false);
+      }
+    });
+
+    // Search Functionality
+    searchInput.addEventListener('input', (e) => {
+      const query = (e.target as HTMLInputElement).value.toLowerCase();
+      let hasResults = false;
+
+      options.forEach((option) => {
+        const parent = option.parentElement;
+        if (!parent) return;
+        
+        const name = option.querySelector('.lang-name')?.textContent?.toLowerCase() || '';
+        if (name.includes(query)) {
+          parent.style.display = '';
+          hasResults = true;
+        } else {
+          parent.style.display = 'none';
+        }
+      });
+    });
+
+    // Language Selection
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        const newLang = option.getAttribute('data-lang');
+        if (!newLang) return;
+
+        const pathParts = window.location.pathname.split('/');
+        // Expected: ["", "lang", "book", "chapter"] or ["", "lang"]
+        
+        if (pathParts.length >= 2) {
+          // If the first part is a language code (2 chars), replace it
+          // Otherwise, prepend it? The original logic assumed pathParts[1] is lang.
+          // Let's stick to the original logic:
+          if (pathParts[1].length === 2) {
+             pathParts[1] = newLang;
+             window.location.href = pathParts.join('/');
+          } else {
+             // Fallback if we are on root or weird path
+             window.location.href = `/${newLang}/genesis/1`;
+          }
+        } else {
+          window.location.href = `/${newLang}/genesis/1`;
+        }
+      });
+    });
+
+    function toggleMenu(show: boolean) {
+      trigger?.setAttribute('aria-expanded', show.toString());
+      if (show) {
+        menu?.classList.add('show');
+        searchInput.focus();
+      } else {
+        menu?.classList.remove('show');
+      }
+    }
+  }
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+    font-family: 'Lato', sans-serif;
+  }
+
+  /* Trigger Button */
+  .switcher-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 8px;
+    color: var(--theme-text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .switcher-trigger:hover, .switcher-trigger[aria-expanded="true"] {
+    border-color: var(--theme-accent);
+    background: var(--theme-bg);
+  }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+  }
+
+  .switcher-trigger[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Menu */
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 280px;
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Search */
+  .search-container {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--theme-border);
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 1rem;
+    color: var(--theme-text);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  #lang-search {
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    background: var(--theme-bg);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--theme-text);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  #lang-search:focus {
+    border-color: var(--theme-accent);
+  }
+
+  /* List */
+  .lang-list {
+    list-style: none;
+    padding: 0.5rem;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .lang-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .lang-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .lang-list::-webkit-scrollbar-thumb {
+    background: var(--theme-border);
+    border-radius: 3px;
+  }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 0.75rem;
+    text-decoration: none;
+    color: var(--theme-text);
+    border-radius: 6px;
+    transition: background 0.15s;
+    font-size: 0.95rem;
+  }
+
+  .lang-option:hover {
+    background: var(--theme-bg);
+  }
+
+  .lang-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .audio-badge {
+    color: var(--theme-accent);
+    display: flex;
+    align-items: center;
+  }
+
+  .audio-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .check-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--theme-accent);
+  }
+
+  .no-results {
+    padding: 1rem;
+    text-align: center;
+    color: var(--theme-text);
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+</style>

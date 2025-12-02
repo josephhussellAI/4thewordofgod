@@ -9,6 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.2"
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/cloudflare": "^12.6.12",
+    "@google/generative-ai": "^0.24.1",
+    "astro": "^5.16.2",
+    "dotenv": "^17.2.3",
+    "typescript": "^5.9.3"
   }
 }
